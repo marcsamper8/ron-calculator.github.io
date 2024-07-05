@@ -189,7 +189,7 @@ function reset(shape) {
 }
 
 function calculateCube() {
-    const size = document.getElementById('cubeSize').value;
+    const size = parseFloat(document.getElementById('cubeSize').value);
     const surfaceArea = 6 * Math.pow(size, 2);
     const volume = Math.pow(size, 3);
     document.getElementById('cubeSurfaceArea').innerText = surfaceArea;
@@ -197,7 +197,7 @@ function calculateCube() {
 }
 
 function calculateSphere() {
-    const radius = document.getElementById('sphereRadius').value;
+    const radius = parseFloat(document.getElementById('sphereRadius').value);
     const surfaceArea = 4 * Math.PI * Math.pow(radius, 2);
     const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
     document.getElementById('sphereSurfaceArea').innerText = surfaceArea;
@@ -205,8 +205,8 @@ function calculateSphere() {
 }
 
 function calculateCylinder() {
-    const height = document.getElementById('cylinderHeight').value;
-    const radius = document.getElementById('cylinderRadius').value;
+    const height = parseFloat(document.getElementById('cylinderHeight').value);
+    const radius = parseFloat(document.getElementById('cylinderRadius').value);
     const pi = Math.PI;
     const surfaceArea = 2 * pi * radius * height + 2 * pi * radius * radius;
     const volume = Math.PI * Math.pow(radius, 2) * height;
@@ -215,8 +215,8 @@ function calculateCylinder() {
 }
 
 function calculateCone() {
-    const height = document.getElementById('coneHeight').value;
-    const radius = document.getElementById('coneRadius').value;
+    const height = parseFloat(document.getElementById('coneHeight').value);
+    const radius = parseFloat(document.getElementById('coneRadius').value);
     const pi = Math.PI;
     const surfaceArea = pi * radius * (radius + Math.sqrt(height * height + radius * radius));
     const volume = (1 / 3) * Math.PI * Math.pow(radius, 2) * height;
