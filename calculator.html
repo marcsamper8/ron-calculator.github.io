@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shape Calculator</title>
+    <script src="/Script/calculator.js"></script>
+    <style>
+        .hide {
+            display: none;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-class {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .title{
+            font-size: 18px;
+        }
+        .button-container {
+
+        }
+        .button-main {
+            width: 100px;
+            height: 70px;
+        }
+        .col-1{
+            margin-bottom: 5%;
+        }
+        .button-second {
+            align-items: center;
+            background-clip: padding-box;
+            background-color: #fa6400;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            justify-content: center;
+            line-height: 1.25;
+            margin: 0;
+            min-height: 3rem;
+            padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+            position: relative;
+            text-decoration: none;
+            transition: all 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            width: 100px;
+        }
+
+        .button-second:hover,
+        .button-second:focus {
+        background-color: #fb8332;
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        }
+
+        .button-second:hover {
+        transform: translateY(-1px);
+        }
+
+        .button-second:active {
+        background-color: #c85000;
+        box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+        transform: translateY(0);
+        }
+
+        input[type=number]{
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 8%;
+            box-sizing: border-box;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="home" class="home-class">
+        <div class="title">
+            <h1>Select a Calculator:</h1>
+        </div>
+        <div class="button-container">
+            <div class="col-1">
+                <button class="button-main" onclick="showCalculator('cube')">Cube</button>
+                <button class="button-main" onclick="showCalculator('sphere')">Sphere</button>
+            </div>
+            <div class="col-2">
+                <button class="button-main" onclick="showCalculator('cylinder')">Cylinder</button>
+                <button class="button-main" onclick="showCalculator('cone')">Cone</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="cube" class="shape hide">
+        <h1>Cube</h1>
+        <label>Enter size of a cube:</label>
+        <input type="number" id="cubeSize"><br><br>
+        <button class="button-second" onclick="calculateCube()">Calculate</button>
+        <button class="button-second" onclick="reset('cube')">Reset</button>
+        <button class="button-second" onclick="showHome()">Home</button>
+        <p>Surface Area: <span id="cubeSurfaceArea"></span></p>
+        <p>Volume: <span id="cubeVolume"></span></p>
+    </div>
+
+    <div id="sphere" class="shape hide">
+        <h1>Sphere</h1>
+        <label>Enter radius:</label>
+        <input type="number" id="sphereRadius"><br><br>
+        <button class="button-second" onclick="calculateSphere()">Calculate</button>
+        <button class="button-second" onclick="reset('sphere')">Reset</button>
+        <button class="button-second" onclick="showHome()">Home</button>
+        <p>Surface Area: <span id="sphereSurfaceArea"></span></p>
+        <p>Volume: <span id="sphereVolume"></span></p>
+    </div>
+
+    <div id="cylinder" class="shape hide">
+        <h1>Cylinder</h1>
+        <label>Enter height:</label>
+        <input type="number" id="cylinderHeight"><br><br>
+        <label>Enter radius:</label>
+        <input type="number" id="cylinderRadius"><br><br>
+        <button class="button-second" onclick="calculateCylinder()">Calculate</button>
+        <button class="button-second" onclick="reset('cylinder')">Reset</button>
+        <button class="button-second" onclick="showHome()">Home</button>
+        <p>Surface Area: <span id="cylinderSurfaceArea"></span></p>
+        <p>Volume: <span id="cylinderVolume"></span></p>
+    </div>
+
+    <div id="cone" class="shape hide">
+        <h1>Cone</h1>
+        <label>Enter height:</label>
+        <input type="number" id="coneHeight"><br><br>
+        <label>Enter radius:</label>
+        <input type="number" id="coneRadius"><br><br>
+        <button class="button-second" onclick="calculateCone()">Calculate</button>
+        <button class="button-second" onclick="reset('cone')">Reset</button>
+        <button class="button-second" onclick="showHome()">Home</button>
+        <p>Surface Area: <span id="coneSurfaceArea"></span></p>
+        <p>Volume: <span id="coneVolume"></span></p>
+    </div>
+
+    <script>
+     var shapes = document.querySelectorAll('.shape');
+
+     function HideAll(){
+        shapes.forEach(shapes => shapes.classList.remove('container'));
+        shapes.forEach(shapes => shapes.classList.add('hide'));
+     }
+     
+    function showCalculator(shape) {
+        document.getElementById('home').classList.add('hide');
+        document.getElementById('home').classList.remove('home-class');
+        HideAll();
+        document.getElementById(shape).classList.remove('hide');
+        document.getElementById(shape).classList.add('container');
+}
+
+function showHome() {
+    HideAll();
+    document.getElementById('home').classList.remove('hide');
+    document.getElementById('home').classList.add('home-class');
+
+}
+
+function reset(shape) {
+    document.getElementById(shape + 'SurfaceArea').innerText = '';
+    document.getElementById(shape + 'Volume').innerText = '';
+    const inputs = document.querySelectorAll('#' + shape + ' input');
+    inputs.forEach(input => input.value = '');
+}
+
+function calculateCube() {
+    const size = document.getElementById('cubeSize').value;
+    const surfaceArea = 6 * Math.pow(size, 2);
+    const volume = Math.pow(size, 3);
+    document.getElementById('cubeSurfaceArea').innerText = surfaceArea;
+    document.getElementById('cubeVolume').innerText = volume;
+}
+
+function calculateSphere() {
+    const radius = document.getElementById('sphereRadius').value;
+    const surfaceArea = 4 * Math.PI * Math.pow(radius, 2);
+    const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+    document.getElementById('sphereSurfaceArea').innerText = surfaceArea;
+    document.getElementById('sphereVolume').innerText = volume;
+}
+
+function calculateCylinder() {
+    const height = document.getElementById('cylinderHeight').value;
+    const radius = document.getElementById('cylinderRadius').value;
+    const surfaceArea = 2 * Math.PI * radius * (height + radius);
+    const volume = Math.PI * Math.pow(radius, 2) * height;
+    document.getElementById('cylinderSurfaceArea').innerText = surfaceArea;
+    document.getElementById('cylinderVolume').innerText = volume;
+}
+
+function calculateCone() {
+    const height = document.getElementById('coneHeight').value;
+    const radius = document.getElementById('coneRadius').value;
+    const surfaceArea = Math.PI * radius * (radius + Math.sqrt(Math.pow(height, 2) + Math.pow(radius, 2)));
+    const volume = (1 / 3) * Math.PI * Math.pow(radius, 2) * height;
+    document.getElementById('coneSurfaceArea').innerText = surfaceArea;
+    document.getElementById('coneVolume').innerText = volume;
+}
+</script>
+    </body>
+</html>
